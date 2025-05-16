@@ -2,6 +2,10 @@
 
 A full-stack real-time Tic-Tac-Toe game built with Python, Temporal, FastAPI, WebSockets and vanilla JavaScript.
 
+
+https://github.com/user-attachments/assets/f179e6d1-2a11-4df8-9fc9-203d76703080
+
+
 ## Project Structure
 
 ```
