@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tic-Tac-Toe Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Tic-Tac-Toe</h1>
+
+      <!-- Lobby View -->
+      <div id="lobby-view" class="view">
+        <div class="lobby-options">
+          <button id="create-room-btn" class="btn">
+            <i class="fas fa-plus-circle"></i> Create New Room
+          </button>
+
+          <div class="join-room">
+            <input
+              type="text"
+              id="room-id-input"
+              placeholder="Enter Room ID"
+              autofocus
+            />
+            <button id="join-room-btn" class="btn">
+              <i class="fas fa-sign-in-alt"></i> Join
+            </button>
+          </div>
+
+          <button id="auto-match-btn" class="btn">
+            <i class="fas fa-bolt"></i> Quick Match
+          </button>
+        </div>
+        <div id="lobby-message"></div>
+      </div>
+
+      <!-- Game View -->
+      <div id="game-view" class="view hidden">
+        <div class="game-info">
+          <div class="room-info">
+            <span>Room: </span>
+            <span id="room-id-display"></span>
+            <button id="copy-room-id" class="btn-small">
+              <i class="fas fa-copy"></i> Copy
+            </button>
+          </div>
+          <div id="game-status">Waiting for opponent...</div>
+          <div id="timer" class="hidden">
+            <i class="fas fa-clock"></i> Time: <span id="time-left">30</span>s
+          </div>
+        </div>
+
+        <div id="game-board">
+          <div class="board-row">
+            <div class="board-cell" data-x="0" data-y="0"></div>
+            <div class="board-cell" data-x="1" data-y="0"></div>
+            <div class="board-cell" data-x="2" data-y="0"></div>
+          </div>
+          <div class="board-row">
+            <div class="board-cell" data-x="0" data-y="1"></div>
+            <div class="board-cell" data-x="1" data-y="1"></div>
+            <div class="board-cell" data-x="2" data-y="1"></div>
+          </div>
+          <div class="board-row">
+            <div class="board-cell" data-x="0" data-y="2"></div>
+            <div class="board-cell" data-x="1" data-y="2"></div>
+            <div class="board-cell" data-x="2" data-y="2"></div>
+          </div>
+        </div>
+
+        <div class="game-controls">
+          <div class="player-info">
+            <div id="player-mark"></div>
+          </div>
+          <div class="action-buttons">
+            <button id="new-game-btn" class="btn hidden">
+              <i class="fas fa-redo"></i> Play Again
+            </button>
+            <button id="back-to-lobby-btn" class="btn">
+              <i class="fas fa-home"></i> Back to Lobby
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
