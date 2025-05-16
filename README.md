@@ -1,89 +1,76 @@
-# Tic-Tac-Toe Reimagined with Temporal
+# Ever Wonder How Multiplayer Web Games Stay in Sync? Let's Build One!
 
-A real-time multiplayer Tic-Tac-Toe game inspired by [this YouTube video](https://youtu.be/ftYmXoH0V5I) sponsored by Temporal.
+Remember those game nights where everyone's trying to play on different devices, and things just… lag or break? We've all been there. This project is a little exploration into making that experience smoother, inspired by a cool [YouTube challenge](https://youtu.be/ftYmXoH0V5I) where developers built a multiplayer game in just 4 hours using Temporal.
 
-![Tic-Tac-Toe Game](https://img.shields.io/badge/Game-Tic--Tac--Toe-blue)
-![Temporal](https://img.shields.io/badge/Powered%20by-Temporal-orange)
+[![Tic-Tac-Toe Gameplay](https://github.com/user-attachments/assets/f179e6d1-2a11-4df8-9fc9-203d76703080)](https://github.com/user-attachments/assets/f179e6d1-2a11-4df8-9fc9-203d76703080)
 
-## ✨ What's This All About?
+## The Spark: A 4-Hour Game Dev Challenge
 
-Ever wondered how to build real-time games that don't fall apart when things go wrong? That's where Temporal comes in! This project shows how Temporal's durable execution can make even a simple game like Tic-Tac-Toe more robust.
+The video that kicked this off was all about a speedrun: 30 minutes to plan, 4 hours to build and deploy a multiplayer web game. The secret sauce? Temporal. It's a system that helps manage all the tricky behind-the-scenes stuff (like making sure Player 1's move on their phone shows up correctly for Player 2 on their laptop) reliably, even when things go a bit haywire. It's all about making complex, real-time interactions less of a headache.
 
-After watching the [Temporal-sponsored YouTube video](https://youtu.be/ftYmXoH0V5I), I was inspired to build this game that demonstrates how Temporal can handle:
+This project is my take on that idea, building a classic Tic-Tac-Toe game that you can play with friends across different devices.
 
-- Managing game state across server restarts
-- Coordinating turns between players
-- Handling timeouts when players take too long
-- All while keeping the gameplay smooth!
+## What's Inside? (A Quick Peek)
 
-## 🎮 Game Features
+This isn't just any Tic-Tac-Toe. Here's what makes it tick:
 
-- **Create or Join Rooms**: Play with friends by sharing a room code
-- **Quick Match**: Get paired with a random opponent
-- **Timed Turns**: 30 seconds per move to keep things exciting
-- **Responsive Design**: Play on any device
-- **Real-Time Updates**: See your opponent's moves instantly
+*   **Play Anywhere**: Create a game room, share the ID, and play on desktop or mobile.
+*   **Real-Time Fun**: Moves show up instantly, thanks to WebSockets.
+*   **Fair Play**: A 30-second timer keeps the game moving, and turns are strictly enforced.
+*   **Know Who Won**: The game automatically figures out wins and draws.
+*   **Built to Last (Sort Of!)**: Temporal workflows help the game remember what's happening, even if there are hiccups.
 
-## 🚀 Getting Started
+## Want to Try It? (The Quick Version)
 
-### Prerequisites
-- Python 3.10+
-- Temporal Server
+You'll need a couple of things first:
+1.  Python (3.10 or newer should do it).
+2.  Temporal Server (check their docs for the [dev server setup](https://docs.temporal.io/dev-guide/typescript/foundations#run-a-development-server)).
 
-### Quick Setup
+Got those? Great!
 
-1. **Start Temporal Server**
-   ```
-   temporal server start-dev --db-filename your_temporal.db --ui-port 8080
-   ```
+1.  **Fire up Temporal Server**:
+    ```bash
+    # If you have Docker, this is usually the easiest way:
+    docker run --network host temporalio/temporal:latest server start-dev
+    ```
 
-2. **Launch the Backend**
-   ```
-   cd services/backend
-   pip install -r requirements.txt
-   python server.py
-   ```
+2.  **Get the Backend Running**:
+    Open a terminal, go to the `services/backend` folder, and run:
+    ```bash
+    pip install -r requirements.txt 
+    python server.py 
+    ```
+    Then, in *another* terminal (still in `services/backend`):
+    ```bash
+    python worker.py
+    ```
 
-3. **In another terminal, start the Temporal Worker**
-   ```
-   cd services/backend
-   python worker.py
-   ```
+3.  **Launch the Frontend**:
+    Open a *third* terminal, head to `web/frontend`, and type:
+    ```bash
+    python3 -m http.server 8000
+    ```
+    (If `python3` doesn't work, try `python`.)
 
-4. **Serve the Frontend**
-   ```
-   cd web/frontend
-   python3 -m http.server 8000
-   ```
+4.  **Play!**
+    Open your web browser and go to `http://localhost:8000`.
 
-5. **Play!** Open your browser to http://localhost:8000
+## How the Magic Happens (Simplified)
 
-## 🏗️ How It's Built
+Basically, the backend (the brain of the game) uses Temporal to keep track of everything – whose turn it is, what the board looks like, and so on. The game you see in your browser talks to this brain using WebSockets, so updates are super fast.
 
-The magic happens through a combination of:
+## Testing it Out
 
-- **Frontend**: Simple HTML, CSS and JavaScript
-- **Backend**: Python FastAPI for HTTP and WebSocket endpoints
-- **Temporal**: For durable game state management and workflow orchestration
+If you're curious about the backend tests:
+```bash
+cd services/backend
+python -m unittest discover tests
+```
 
-Temporal ensures that even if your server crashes mid-game, the game state is preserved and players can continue right where they left off!
+## License
 
-## 🔮 Why Temporal?
+This project is shared under the MIT License. Have fun with it!
 
-Traditional game backends need complex database setups and error-handling logic. With Temporal, the workflow engine handles the hard parts:
+---
 
-- **State Management**: No need for constant database writes
-- **Error Handling**: Automatic retries and recovery
-- **Timer Management**: Easy implementation of turn timeouts
-- **Code Organization**: Clean separation of game logic
-
-## 🤝 Contribute
-
-Feel free to fork this project and add your own features! Some ideas:
-- Game statistics
-- Customizable player profiles
-- More game modes
-
-## 📝 License
-
-MIT 
+*Inspired by the "Build a multiplayer game in 4 hours" challenge sponsored by Temporal: [https://youtu.be/ftYmXoH0V5I](https://youtu.be/ftYmXoH0V5I)* 
