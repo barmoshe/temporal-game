@@ -30,8 +30,7 @@ Got those? Great!
 
 1.  **Fire up Temporal Server**:
     ```bash
-    # If you have Docker, this is usually the easiest way:
-    docker run --network host temporalio/temporal:latest server start-dev
+   temporal server start-dev --db-filename your_temporal.db --ui-port 8080
     ```
 
 2.  **Get the Backend Running**:
@@ -54,18 +53,15 @@ Got those? Great!
 
 4.  **Play!**
     Open your web browser and go to `http://localhost:8000`.
+    
+    Want to play with a friend? Just open another browser window, tab, or use a different device, and go to the same address (`http://localhost:8000`).
+    
+    One person creates a game room and shares the room ID with the other. The second player joins using that ID, and you're ready to play against each other in real time!
 
 ## How the Magic Happens (Simplified)
 
 Basically, the backend (the brain of the game) uses Temporal to keep track of everything – whose turn it is, what the board looks like, and so on. The game you see in your browser talks to this brain using WebSockets, so updates are super fast.
 
-## Testing it Out
-
-If you're curious about the backend tests:
-```bash
-cd services/backend
-python -m unittest discover tests
-```
 
 ## License
 
