@@ -1,80 +1,89 @@
-# Real-Time Tic-Tac-Toe Game with Temporal
+# Tic-Tac-Toe Reimagined with Temporal
 
-A full-stack real-time Tic-Tac-Toe game built with Python, Temporal, FastAPI, WebSockets and vanilla JavaScript.
+A real-time multiplayer Tic-Tac-Toe game inspired by [this YouTube video](https://youtu.be/ftYmXoH0V5I) sponsored by Temporal.
 
-## Project Structure
+![Tic-Tac-Toe Game](https://img.shields.io/badge/Game-Tic--Tac--Toe-blue)
+![Temporal](https://img.shields.io/badge/Powered%20by-Temporal-orange)
 
-```
-├── services/backend
-│   ├── server.py        # HTTP & WebSocket endpoints
-│   ├── worker.py        # Temporal worker process
-│   ├── workflows.py     # Room lifecycle & turn workflows
-│   ├── activities.py    # Win/draw checks, validations
-│   ├── tests/           # Unit tests
-│   ├── requirements.txt # Dependencies
-│   └── README.md        # Backend-specific docs
-│
-└── web/frontend
-    ├── index.html       # Game UI
-    ├── styles.css       # Styling
-    └── app.js           # Client-side logic
-```
+## ✨ What's This All About?
 
-## Features
+Ever wondered how to build real-time games that don't fall apart when things go wrong? That's where Temporal comes in! This project shows how Temporal's durable execution can make even a simple game like Tic-Tac-Toe more robust.
 
-- **Room Management**: Create or join game rooms with unique IDs
-- **Real-Time Updates**: WebSocket-based communication for immediate feedback
-- **Turn-Based Play**: Enforced turn order with 30-second move timer
-- **Win Detection**: Automatic detection of wins and draws
-- **Durable State**: Temporal workflows for fault-tolerance and state preservation
-- **Responsive UI**: Works on desktop and mobile devices
+After watching the [Temporal-sponsored YouTube video](https://youtu.be/ftYmXoH0V5I), I was inspired to build this game that demonstrates how Temporal can handle:
 
-## Prerequisites
+- Managing game state across server restarts
+- Coordinating turns between players
+- Handling timeouts when players take too long
+- All while keeping the gameplay smooth!
 
-1. Python 3.10 or higher
-2. [Temporal Server](https://docs.temporal.io/dev-guide/typescript/foundations#run-a-development-server)
+## 🎮 Game Features
 
-## Quick Start
+- **Create or Join Rooms**: Play with friends by sharing a room code
+- **Quick Match**: Get paired with a random opponent
+- **Timed Turns**: 30 seconds per move to keep things exciting
+- **Responsive Design**: Play on any device
+- **Real-Time Updates**: See your opponent's moves instantly
 
-1. **Start Temporal Server**:
-   ```bash
-   docker run --network host temporalio/temporal:latest server start-dev
+## 🚀 Getting Started
+
+### Prerequisites
+- Python 3.10+
+- Temporal Server
+
+### Quick Setup
+
+1. **Start Temporal Server**
+   ```
+   temporal server start-dev --db-filename your_temporal.db --ui-port 8080
    ```
 
-2. **Set Up Backend**:
-   ```bash
+2. **Launch the Backend**
+   ```
    cd services/backend
    pip install -r requirements.txt
-   
-   # Start the server and worker in separate terminals
    python server.py
+   ```
+
+3. **In another terminal, start the Temporal Worker**
+   ```
+   cd services/backend
    python worker.py
    ```
 
-3. **Start Frontend**:
-   ```bash
+4. **Serve the Frontend**
+   ```
    cd web/frontend
    python3 -m http.server 8000
    ```
 
-4. **Play the game**:
-   Open your browser and navigate to `http://localhost:8000`
+5. **Play!** Open your browser to http://localhost:8000
 
-## How It Works
+## 🏗️ How It's Built
 
-- Backend uses Temporal workflows for durable game state management
-- FastAPI provides HTTP and WebSocket endpoints
-- Frontend connects over WebSockets for real-time updates
+The magic happens through a combination of:
 
-## Testing
+- **Frontend**: Simple HTML, CSS and JavaScript
+- **Backend**: Python FastAPI for HTTP and WebSocket endpoints
+- **Temporal**: For durable game state management and workflow orchestration
 
-Run the backend tests:
+Temporal ensures that even if your server crashes mid-game, the game state is preserved and players can continue right where they left off!
 
-```bash
-cd services/backend
-python -m unittest discover tests
-```
+## 🔮 Why Temporal?
 
-## License
+Traditional game backends need complex database setups and error-handling logic. With Temporal, the workflow engine handles the hard parts:
+
+- **State Management**: No need for constant database writes
+- **Error Handling**: Automatic retries and recovery
+- **Timer Management**: Easy implementation of turn timeouts
+- **Code Organization**: Clean separation of game logic
+
+## 🤝 Contribute
+
+Feel free to fork this project and add your own features! Some ideas:
+- Game statistics
+- Customizable player profiles
+- More game modes
+
+## 📝 License
 
 MIT 
